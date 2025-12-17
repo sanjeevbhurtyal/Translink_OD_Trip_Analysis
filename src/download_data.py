@@ -5,28 +5,9 @@ from urllib.parse import urljoin
 from datetime import datetime
 import yaml
 import requests
-from config_loader import Config
 from bs4 import BeautifulSoup
 from zipfile import ZipFile
-
-# ---------------------------
-# Setup logging
-# ---------------------------
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[logging.StreamHandler()]
-)
-
-# ---------------------------
-# Load configuration
-# ---------------------------
-Config.load()
-
-OD_DATA_URL: str = Config.OD_SOURCE_URL
-RAW_DATA_DIR: Path = Config.RAW_DATA_DIR
-DOWNLOAD_DATA: bool = Config.DOWNLOAD_DATA
-RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
+import shutil
 
 # ---------------------------
 # Helper functions
@@ -79,12 +60,22 @@ def record_download(file_path: Path, url: str) -> None:
 # ---------------------------
 # Main processing
 # ---------------------------
-def main():
+def download_data(OD_DATA_URL: str, 
+             RAW_DATA_DIR: Path,
+             DOWNLOAD_DATA: bool) -> None:
+    """Download data files from the OD data source."""
     resource_links = get_resource_links(OD_DATA_URL)
     if DOWNLOAD_DATA is False:
         logging.info(f"DOWNLOAD_DATA is set to False. Exiting without downloading.")
         return
     
+    # Clear RAW_DATA_DIR before downloading
+    if RAW_DATA_DIR.exists():
+        logging.info(f"Clearing existing files in {RAW_DATA_DIR}")
+        shutil.rmtree(RAW_DATA_DIR)
+
+    RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
+
     logging.info(f"Downloading files to {RAW_DATA_DIR}")
     for link in resource_links:
         try:
@@ -105,8 +96,6 @@ def main():
         except Exception as e:
             logging.error(f"Failed to process {link}: {e}")
 
-    logging.info("Download process completed.")
-
     # Update yaml to change download_data_flag to false
     config_path = Path("config/config.yaml")
     with config_path.open("r") as f:
@@ -116,6 +105,3 @@ def main():
         yaml.safe_dump(config_data, f)
 
     logging.info("Updated config.yaml to set download_data_flag to false to prevent re-downloading.")
-
-if __name__ == "__main__":
-    main()

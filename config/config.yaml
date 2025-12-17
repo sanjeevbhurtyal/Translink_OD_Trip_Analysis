@@ -1,6 +1,6 @@
 combined_data:
   combined_data_dir: data/combined/ # Directory to save data compiled from multiple months 
-  combine_data_flag: true # Flag to indicate whether to combine data from multiple months
+  combine_data_flag: false # Flag to indicate whether to combine data from multiple months
 download_data:
   download_data_flag: false # Flag to indicate whether to download new data
   od_source_url: https://www.data.qld.gov.au/dataset/translink-origin-destination-trips-2022-onwards

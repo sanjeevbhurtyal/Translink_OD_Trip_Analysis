@@ -1,36 +1,16 @@
 import logging
 from pathlib import Path
 import pandas as pd
-from config_loader import Config
 from schema import SCHEMA_TRANSLINK_OD_TRIPS
 
-# ---------------------------
-# Setup logging
-# ---------------------------
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s"
-)
-
-# ---------------------------
-# Load configuration
-# ---------------------------
-Config.load()
-
-RAW_DATA_DIR: Path = Config.RAW_DATA_DIR
-COMBINED_DATA_DIR: Path = Config.COMBINED_DATA_DIR
-COMBINED_DATA_DIR.mkdir(parents=True, exist_ok=True)
-OUTPUT_FILE: Path = Config.COMBINED_OUTPUT_FILE
-COMBINE_DATA: bool = Config.COMBINE_DATA
-
-# Define data types
-DTYPE_DICT = SCHEMA_TRANSLINK_OD_TRIPS
 
 # ---------------------------
 # Combine CSV files
 # ---------------------------
 def load_csv_safe(file_path: Path) -> pd.DataFrame:
     """Load CSV safely with dtype and low_memory handling."""
+    # Define data types
+    DTYPE_DICT = SCHEMA_TRANSLINK_OD_TRIPS
     try:
         df = pd.read_csv(file_path, dtype=DTYPE_DICT, low_memory=False)
         return df
@@ -75,17 +55,18 @@ def combine_csv_files(raw_dir: Path) -> pd.DataFrame:
 # ---------------------------
 # Main
 # ---------------------------
-def main():
+def combine_data(RAW_DATA_DIR: Path,
+                 COMBINE_DATA_DIR: Path, 
+                 OUTPUT_FILE: Path,
+                 COMBINE_DATA: bool) -> None:
     if COMBINE_DATA is False:
         logging.info("COMBINE_DATA_FLAG is set to False. Skipping combination step.")
         return
 
+    COMBINE_DATA_DIR.mkdir(parents=True, exist_ok=True)
     combined_df = combine_csv_files(RAW_DATA_DIR)
     if not combined_df.empty:
         combined_df.to_csv(OUTPUT_FILE, index=False)
         logging.info(f"Saved combined data to {OUTPUT_FILE}")
     else:
         logging.warning("No data saved. Combined DataFrame is empty.")
-
-if __name__ == "__main__":
-    main()
