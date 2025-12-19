@@ -1,7 +1,8 @@
 import logging
 from pathlib import Path
 import pandas as pd
-from schema import SCHEMA_TRANSLINK_OD_TRIPS
+import yaml
+from config.schema import SCHEMA_TRANSLINK_OD_TRIPS
 
 
 # ---------------------------
@@ -59,6 +60,12 @@ def combine_data(RAW_DATA_DIR: Path,
                  COMBINE_DATA_DIR: Path, 
                  OUTPUT_FILE: Path,
                  COMBINE_DATA: bool) -> None:
+    
+    # If COMBINE_DATA_DIR doesn't exist, create it and set COMBINE_DATA_FLAG to True
+    if not COMBINE_DATA_DIR.exists():   
+        COMBINE_DATA_DIR.mkdir(parents=True, exist_ok=True)
+        COMBINE_DATA = True
+    
     if COMBINE_DATA is False:
         logging.info("COMBINE_DATA_FLAG is set to False. Skipping combination step.")
         return
@@ -68,5 +75,18 @@ def combine_data(RAW_DATA_DIR: Path,
     if not combined_df.empty:
         combined_df.to_csv(OUTPUT_FILE, index=False)
         logging.info(f"Saved combined data to {OUTPUT_FILE}")
+        
+        # Update yaml to change combine_data_flag to false
+        config_path = Path("config/config.yaml")
+        with config_path.open("r") as f:
+            config_data = yaml.safe_load(f)
+        config_data['combined_data']['combine_data_flag'] = False
+        with config_path.open("w") as f:
+            yaml.safe_dump(config_data, f)
+
+        logging.info("Updated config.yaml to set combine_data_flag to false to prevent re-combining.")
+
     else:
         logging.warning("No data saved. Combined DataFrame is empty.")
+
+    

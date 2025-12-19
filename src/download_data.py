@@ -62,18 +62,23 @@ def record_download(file_path: Path, url: str) -> None:
 # ---------------------------
 def download_data(OD_DATA_URL: str, 
              RAW_DATA_DIR: Path,
-             DOWNLOAD_DATA: bool) -> None:
+             DOWNLOAD_DATA: bool,
+             COMBINE_DATA: bool) -> bool:
     """Download data files from the OD data source."""
     resource_links = get_resource_links(OD_DATA_URL)
+    
+    # If RAW_DATA_DIR doesn't exist, create it and set download_data_flag to True
+    if not RAW_DATA_DIR.exists():   
+        RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
+        DOWNLOAD_DATA = True
+
     if DOWNLOAD_DATA is False:
         logging.info(f"DOWNLOAD_DATA is set to False. Exiting without downloading.")
-        return
-    
-    # Clear RAW_DATA_DIR before downloading
-    if RAW_DATA_DIR.exists():
-        logging.info(f"Clearing existing files in {RAW_DATA_DIR}")
-        shutil.rmtree(RAW_DATA_DIR)
+        return COMBINE_DATA
 
+    # Clear RAW_DATA_DIR before downloading
+    logging.info(f"Clearing existing files in {RAW_DATA_DIR}")
+    shutil.rmtree(RAW_DATA_DIR)
     RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     logging.info(f"Downloading files to {RAW_DATA_DIR}")
@@ -105,3 +110,7 @@ def download_data(OD_DATA_URL: str,
         yaml.safe_dump(config_data, f)
 
     logging.info("Updated config.yaml to set download_data_flag to false to prevent re-downloading.")
+
+    # Set combine_data_flag to True
+    COMBINE_DATA = True
+    return COMBINE_DATA
