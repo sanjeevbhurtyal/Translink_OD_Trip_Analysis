@@ -12,6 +12,10 @@ class Config:
     RAW_DATA_DIR: Path = None
     COMBINED_DATA_DIR: Path = None
     COMBINED_OUTPUT_FILE: Path = None
+    PROCESS_DATA_DIR: Path = None
+    PROCESS_OUTPUT_FILE: Path = None
+    SUBURBS_DATA_DIR: Path = None
+    SUBURBS_SHAPEFILE: Path = None
     DOWNLOAD_DATA: bool = False
     COMBINE_DATA: bool = False
 
@@ -27,7 +31,11 @@ class Config:
             cls.OD_SOURCE_URL = cls._config["download_data"]["od_source_url"]
             cls.RAW_DATA_DIR = Path(cls._config["download_data"]["raw_data_dir"])
             cls.COMBINED_DATA_DIR = Path(cls._config["combined_data"]["combined_data_dir"])
-            cls.COMBINED_OUTPUT_FILE = cls.COMBINED_DATA_DIR / "combined_data.csv"
+            cls.COMBINED_OUTPUT_FILE = cls.COMBINED_DATA_DIR / cls._config["combined_data"]["combined_output_file_name"]
+            cls.PROCESS_DATA_DIR = Path(cls._config["process_data"]["process_data_dir"])
+            cls.PROCESS_OUTPUT_FILE = cls.PROCESS_DATA_DIR / cls._config["process_data"]["processed_output_file_name"]
+            cls.SUBURBS_DATA_DIR = Path(cls._config["suburbs_data"]["suburbs_data_dir"])
+            cls.SUBURBS_SHAPEFILE = cls.SUBURBS_DATA_DIR / cls._config["suburbs_data"]["suburbs_shapefile"]
             cls.DOWNLOAD_DATA = cls._config["download_data"].get("download_data_flag", False)
             cls.COMBINE_DATA = cls._config["combined_data"].get("combine_data_flag", False)
             # Adjust COMBINE_DATA based on DOWNLOAD_DATA

@@ -1,7 +1,14 @@
 combined_data:
-  combined_data_dir: data/combined/ # Directory to save data compiled from multiple months 
-  combine_data_flag: false # Flag to indicate whether to combine data from multiple months
+  combine_data_flag: false
+  combined_data_dir: data/combined/
+  combined_output_file_name: combined_data.csv
 download_data:
-  download_data_flag: false # Flag to indicate whether to download new data
+  download_data_flag: false
   od_source_url: https://www.data.qld.gov.au/dataset/translink-origin-destination-trips-2022-onwards
-  raw_data_dir: data/raw/ # Directory to save raw downloaded data
+  raw_data_dir: data/raw/
+process_data:
+  process_data_dir: data/processed/
+  processed_output_file_name: od_data.csv
+suburbs_data:
+  suburbs_data_dir: data/suburbs/
+  suburbs_shapefile: Locality_Boundaries.shp

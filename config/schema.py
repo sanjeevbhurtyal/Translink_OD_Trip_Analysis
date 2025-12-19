@@ -9,3 +9,4 @@ SCHEMA_TRANSLINK_OD_TRIPS = {
     "destination_stop": "string",
     "quantity": "Int64"
 }
+
