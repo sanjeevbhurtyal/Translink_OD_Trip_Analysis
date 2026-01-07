@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 import geopandas as gpd
-from config.mapping import TIME_PERIOD_MAP   
+from config.mapping import TIME_PERIOD_MAP, OPERATOR_MODE_MAP   
 import logging
 
 def process_data(COMBINED_DATA_DIR: Path,
@@ -70,14 +70,23 @@ def process_data(COMBINED_DATA_DIR: Path,
         .drop(columns="stop_id")
     )
 
+    # Fill missing values with "Unknown"
+    trips_df["origin_loc_code"] = trips_df["origin_loc_code"].fillna("Unknown")
+    trips_df["destination_loc_code"] = trips_df["destination_loc_code"].fillna("Unknown")
+
     # ---------------------------------------------------------------------
     # Temporal attributes
     # ---------------------------------------------------------------------
     trips_df["time_period"] = trips_df["time"].map(TIME_PERIOD_MAP)
 
+    # ---------------------------------------------------------------------
+    # Add mode
+    # ---------------------------------------------------------------------
+    trips_df["mode"] = trips_df["operator"].map(OPERATOR_MODE_MAP)
+
     # Drop unused fields
     trips_df = trips_df.drop(
-        columns=["origin_stop", "destination_stop", "ticket_type", "time"]
+        columns=["origin_stop", "destination_stop", "time"]
     )
 
     # ---------------------------------------------------------------------
@@ -91,7 +100,9 @@ def process_data(COMBINED_DATA_DIR: Path,
                 "operator",
                 "month",
                 "route",
+                "mode",
                 "time_period",
+                "ticket_type",
                 "origin_loc_code",
                 "destination_loc_code",
             ],
