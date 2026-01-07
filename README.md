@@ -88,5 +88,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - GitHub: [@sanjeevbhurtyal](https://github.com/sanjeevbhurtyal)
 - LinkedIn: [Sanjeev Bhurtyal](https://www.linkedin.com/in/sanjeev-bhurtyal/)
+- Website: [Transport Analytics & Insights](https://sanjeevbhurtyal.github.io/TAI/)
 
 *Last Updated: January 2026*
