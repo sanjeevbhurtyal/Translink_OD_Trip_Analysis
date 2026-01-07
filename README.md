@@ -4,9 +4,10 @@
 
 This repository provides a reproducible pipeline for downloading, processing, and analyzing TransLink OD patronage data.
 
-**Analysis Blog Post:** [Translink Origin-Destination Patronage Analysis](https://sanjeevbhurtyal.github.io/TAI/translink-od/)
+**Analysis Blog Post:** <a href="https://sanjeevbhurtyal.github.io/TAI/translink-od/" target="_blank" rel="noopener noreferrer">Translink Origin-Destination Patronage Analysis</a>
 
-**Interactive Dashboard:** [Tableau Patronage Analysis](https://public.tableau.com/views/TranslinkPatronageAnlaysis/SuburbProfile?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+**Interactive Dashboard:** <a href="https://public.tableau.com/views/TranslinkPatronageAnlaysis/SuburbProfile?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener noreferrer">Translink Patronage Analysis Dashboard</a>
+
 
 ## Repository Structure
 ```
@@ -31,8 +32,9 @@ This repository provides a reproducible pipeline for downloading, processing, an
 
 ## Data Source
 
-1. Patronage data is sourced from the Queensland Government [Open Data Portal](https://www.data.qld.gov.au/dataset/translink-origin-destination-trips-2022-onwards).
-2. Suburb boundaries shapefile is obtained from the [Queensland Spatial Catalogue](https://qldspatial.information.qld.gov.au/catalogue/custom/detail.page?fid={8F24D271-EE3B-491C-915C-E7DD617F95DC}).
+1. Patronage data is sourced from the Queensland Government <a href="https://www.data.qld.gov.au/dataset/translink-origin-destination-trips-2022-onwards" target="_blank" rel="noopener noreferrer">Open Data Portal</a>.
+2. Locality boundaries shapefile is obtained from the <a href="https://qldspatial.information.qld.gov.au/catalogue/custom/detail.page?fid={8F24D271-EE3B-491C-915C-E7DD617F95DC}" target="_blank" rel="noopener noreferrer">Queensland Spatial Catalogue</a>.
+
 
 **Important Notes:**
 - Raw data files are **not included** in this repository due to size constraints (~several GB)
@@ -62,7 +64,7 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-1. Download Suburb Boundaries Shapefile from [Queensland Spatial Catalogue](https://qldspatial.information.qld.gov.au/catalogue/custom/detail.page?fid={8F24D271-EE3B-491C-915C-E7DD617F95DC}) and place it in the `data/suburbs/` directory.
+1. Download Locality Boundaries Shapefile from the <a href="https://qldspatial.information.qld.gov.au/catalogue/custom/detail.page?fid={8F24D271-EE3B-491C-915C-E7DD617F95DC}" target="_blank" rel="noopener noreferrer">Queensland Spatial Catalogue</a> and place it in the `data/suburbs/` directory.
 2. Update configuration settings in `config/config.yaml` as needed.
 3. Run the main analysis script:
     ```bash
@@ -85,8 +87,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Author
 
 **Sanjeev Bhurtyal**
+- GitHub: <a href="https://github.com/sanjeevbhurtyal" target="_blank" rel="noopener noreferrer">@sanjeevbhurtyal</a>
+- LinkedIn: <a href="https://www.linkedin.com/in/sanjeev-bhurtyal/" target="_blank" rel="noopener noreferrer">Sanjeev Bhurtyal</a>
+- Website: <a href="https://sanjeevbhurtyal.github.io/TAI/" target="_blank" rel="noopener noreferrer">Transport Analytics & Insights</a>
 
-- GitHub: [@sanjeevbhurtyal](https://github.com/sanjeevbhurtyal)
-- LinkedIn: [Sanjeev Bhurtyal](https://www.linkedin.com/in/sanjeev-bhurtyal/)
 
 *Last Updated: January 2026*
