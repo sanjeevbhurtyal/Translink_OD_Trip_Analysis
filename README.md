@@ -4,7 +4,7 @@
 
 This repository provides a reproducible pipeline for downloading, processing, and analyzing TransLink OD patronage data.
 
-**Analysis Blog Post:** <a href="https://sanjeevbhurtyal.github.io/TAI/translink-od/" target="_blank" rel="noopener noreferrer">Translink Origin-Destination Patronage Analysis</a>
+**Analysis Blog Post:** <a href="https://transportaai.github.io/translink-od/" target="_blank" rel="noopener noreferrer">Translink Origin-Destination Patronage Analysis</a>
 
 **Interactive Dashboard:** <a href="https://public.tableau.com/views/TranslinkPatronageAnlaysis/SuburbProfile?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener noreferrer">Translink Patronage Analysis Dashboard</a>
 
@@ -89,7 +89,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Sanjeev Bhurtyal**
 - GitHub: <a href="https://github.com/sanjeevbhurtyal" target="_blank" rel="noopener noreferrer">@sanjeevbhurtyal</a>
 - LinkedIn: <a href="https://www.linkedin.com/in/sanjeev-bhurtyal/" target="_blank" rel="noopener noreferrer">Sanjeev Bhurtyal</a>
-- Website: <a href="https://sanjeevbhurtyal.github.io/TAI/" target="_blank" rel="noopener noreferrer">Transport Analytics & Insights</a>
+- Website: <a href="https://transportaai.github.io/" target="_blank" rel="noopener noreferrer">Transport Analytics & Insights</a>
 
 
 *Last Updated: January 2026*
